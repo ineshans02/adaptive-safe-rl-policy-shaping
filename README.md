@@ -196,6 +196,9 @@ All experiments use identical conditions: **5 seeds, 1000 epochs, 19 MPI workers
 
 > Left: reproduced from Wu et al. Figure 1 (5 seeds, mean ± std). Right: our replication (5 seeds, 1000 epochs, 19 MPI workers). Our replication matches Mingkang's final performance and converges significantly faster (~21 epochs vs ~200–300 epochs), confirming correct implementation before adding the policy shaping contribution.
 
+### FetchPush-v1 — Trained Policy Visualization (LFE Baseline, 100% success rate)
+![FetchPush Baseline](results/fetchpush_baseline.gif)
+
 
 ## References
 
