@@ -196,11 +196,6 @@ All experiments use identical conditions: **5 seeds, 1000 epochs, 19 MPI workers
 
 > Left: reproduced from Wu et al. Figure 1 (5 seeds, mean ± std). Right: our replication (5 seeds, 1000 epochs, 19 MPI workers). Our replication matches Mingkang's final performance and converges significantly faster (~21 epochs vs ~200–300 epochs), confirming correct implementation before adding the policy shaping contribution.
 
-### 5-seed baseline learning curve
-
-![FetchPush LFE Baseline](results/thesis_baseline_push.png)
-
----
 
 ## References
 
