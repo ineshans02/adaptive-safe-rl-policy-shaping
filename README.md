@@ -204,6 +204,7 @@ All experiments use identical conditions: **5 seeds, 1000 epochs, 19 MPI workers
   <img src="results/fetchpush_baseline.gif" width="480"/>
 </p>
 
+> Trained LFE policy on FetchPush-v1 — 5 seeds, 1000 epochs, 19 MPI workers. The robot arm consistently pushes the puck to the target goal position, converging to 99.87% success rate in ~21 epochs.
 
 ## References
 
