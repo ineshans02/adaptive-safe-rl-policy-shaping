@@ -60,6 +60,7 @@ where $d(s, \mathcal{Z})$ is the Euclidean distance from the gripper to the near
 |--------|-----------|
 | Violation rate | % of timesteps where gripper enters forbidden zone |
 | β activation rate | % of timesteps where β > 0.01 |
+| Shaped action rate | % of actions meaningfully modified by shaping |
 | Success rate | % of episodes reaching the task goal |
 
 ---
@@ -74,6 +75,7 @@ adaptive-safe-rl-policy-shaping/
 │   └── train.py             ← Modified training script with --policy_shaping flag
 ├── results/
 │   ├── thesis_baseline_push.png     ← FetchPush LFE baseline (5 seeds, 1000 epochs)
+│   ├── fetchpush_comparison.png     ← Side-by-side: Mingkang vs our replication
 │   ├── plot_lfe_single.py           ← Plotting script (single graph)
 │   └── plot_lfe_baseline.py         ← Plotting script (multi-subplot)
 ├── docs/
@@ -184,13 +186,19 @@ All experiments use identical conditions: **5 seeds, 1000 epochs, 19 MPI workers
 
 | Method | Success Rate | Convergence Epoch | Seeds |
 |--------|-------------|-------------------|-------|
-| LFE — Mingkang et al. (ICMI 2024) | ~95–100% @ epoch 1000 | ~200–300 | 5 |
-| LFE — Our replication | **0.999 ± 0.000** | **~21** | 5 |
-| LFE + Policy Shaping (ours) | TBD | TBD | 5 |
+| LFE — Mingkang et al. (ICMI 2024) | ~99% ± 1% @ epoch 1000 | ~200–300 | 5 |
+| LFE — Our replication | **99.87% ± 0.18%** | **~21** | 5 |
+| LFE + Policy Shaping (ours) | TBD (training) | TBD | 5 |
+
+### Side-by-side comparison
+
+![FetchPush Comparison](results/fetchpush_comparison.png)
+
+> Left: reproduced from Wu et al. Figure 1 (5 seeds, mean ± std). Right: our replication (5 seeds, 1000 epochs, 19 MPI workers). Our replication matches Mingkang's final performance and converges significantly faster (~21 epochs vs ~200–300 epochs), confirming correct implementation before adding the policy shaping contribution.
+
+### 5-seed baseline learning curve
 
 ![FetchPush LFE Baseline](results/thesis_baseline_push.png)
-
-> Our replication matches and slightly exceeds Mingkang's reported results, confirming correct implementation before adding the policy shaping contribution.
 
 ---
 
