@@ -214,6 +214,35 @@ All experiments use identical conditions: **5 seeds, 1000 epochs, 19 MPI workers
 
 > LFE + Policy Shaping on FetchPush-v1. The red zone represents the forbidden region the gripper must not enter. The shaped action β(s) blends the task policy with a safe policy based on proximity to the zone, achieving ~99.5% success rate with ~0.27% violation rate across 5 seeds.
 
+---
+
+## FetchPush-v1 — Policy Shaping Results
+
+### Figure 1 — Task Success Rate Comparison
+
+<p align="center">
+  <img src="results/fetchpush_figure1_success.png" width="700"/>
+</p>
+
+### Figure 2 — Safety Metrics over Training
+
+<p align="center">
+  <img src="results/fetchpush_figure2_safety.png" width="900"/>
+</p>
+
+### Figure 3 — Safety-Performance Tradeoff
+
+<p align="center">
+  <img src="results/fetchpush_figure3_tradeoff.png" width="700"/>
+</p>
+
+### Table 1 — Aggregate Results (last 100 epochs, 5 seeds)
+
+| Method | Success Rate | Violation Rate | Mean β | Shaped Rate |
+|--------|-------------|----------------|--------|-------------|
+| LFE Baseline | 99.87% ± 0.18% | N/A | N/A | N/A |
+| LFE + Policy Shaping | 99.67% ± 0.36% | 0.263% ± 0.148% | 0.151 | 0.892 |
+
 ## References
 
 1. Wu, M. et al., "Offline Reinforcement Learning with Failure Under Sparse Reward Environments," IEEE ICMI 2024.
