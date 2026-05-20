@@ -206,6 +206,14 @@ All experiments use identical conditions: **5 seeds, 1000 epochs, 19 MPI workers
 
 > Trained LFE policy on FetchPush-v1 — 5 seeds, 1000 epochs, 19 MPI workers. The robot arm consistently pushes the puck to the target goal position, converging to ~100% success rate in ~21 epochs.
 
+### FetchPush-v1 — Policy Shaping Visualization (LFE + Safety Constraint)
+
+<p align="center">
+  <img src="results/fetchpush_policy_shaping.gif" width="480"/>
+</p>
+
+> LFE + Policy Shaping on FetchPush-v1. The red zone represents the forbidden region the gripper must not enter. The shaped action β(s) blends the task policy with a safe policy based on proximity to the zone, achieving ~99.5% success rate with ~0.27% violation rate across 5 seeds.
+
 ## References
 
 1. Wu, M. et al., "Offline Reinforcement Learning with Failure Under Sparse Reward Environments," IEEE ICMI 2024.
