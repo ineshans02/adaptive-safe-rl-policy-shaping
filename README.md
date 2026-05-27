@@ -73,8 +73,8 @@ where $d(s, \mathcal{Z})$ is the Euclidean distance from the gripper to the near
 |-------|-------------|--------|--------|
 | 1 | FetchPush-v1 baseline | 5 seeds, 1000 ep, 19w |  Done |
 | 2 | FetchPush-v1 + policy shaping | 5 seeds, 1000 ep, 19w |  Done |
-| 3 | FetchPickAndPlace-v1 baseline | 5 seeds, 1000 ep, 19w |  Running |
-| 4 | FetchPickAndPlace-v1 + policy shaping | 5 seeds, 1000 ep, 19w |  Pending |
+| 3 | FetchPickAndPlace-v1 baseline | 5 seeds, 1000 ep, 19w |  Done |
+| 4 | FetchPickAndPlace-v1 + policy shaping | 5 seeds, 1000 ep, 19w |  Running |
 | 5 | FetchSlide-v1 baseline | 5 seeds, 1000 ep, 19w |  Pending |
 | 6 | FetchSlide-v1 + policy shaping | 5 seeds, 1000 ep, 19w |  Pending |
 
@@ -260,9 +260,20 @@ All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
 
 ---
 
-## Results — FetchPickAndPlace-v1 *(in progress)*
+## Results — FetchPickAndPlace-v1
 
-Training is currently running. Results will be added upon completion.
+All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
+
+### FetchPickAndPlace-v1 — LFE Baseline Learning Curve
+
+<p align="center">
+  <img src="results/fetchpickandplace_baseline.png" width="700"/>
+</p>
+
+| Method | Success Rate | Convergence Epoch | Seeds |
+|--------|-------------|-------------------|-------|
+| LFE Baseline | **98.76% ± 1.69%** | **~127** | 5 |
+| LFE + Policy Shaping | 🔄 Training | TBD | 5 |
 
 ---
 
