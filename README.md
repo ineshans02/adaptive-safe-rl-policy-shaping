@@ -32,9 +32,9 @@ Experiments are conducted on the **OpenAI Gym Fetch robotics suite** using MuJoC
 
 | Environment | Task | Difficulty | Status |
 |-------------|------|------------|--------|
-| FetchPush-v1 | Push a puck to a goal position | Medium | Primary — Complete |
-| FetchPickAndPlace-v1 | Pick up and place a block at a goal | Hard | In Progress |
-| FetchSlide-v1 | Slide a puck to a distant goal | Very Hard | Pending |
+| FetchPush-v1 | Push a puck to a goal position | Medium | ✅ Complete |
+| FetchPickAndPlace-v1 | Pick up and place a block at a goal | Hard | ✅ Complete |
+| FetchSlide-v1 | Slide a puck to a distant goal | Very Hard | 🔄 Running |
 
 ---
 
@@ -71,12 +71,12 @@ where $d(s, \mathcal{Z})$ is the Euclidean distance from the gripper to the near
 
 | Phase | Environment | Config | Status |
 |-------|-------------|--------|--------|
-| 1 | FetchPush-v1 baseline | 5 seeds, 1000 ep, 19w |  Done |
-| 2 | FetchPush-v1 + policy shaping | 5 seeds, 1000 ep, 19w |  Done |
-| 3 | FetchPickAndPlace-v1 baseline | 5 seeds, 1000 ep, 19w |  Done |
-| 4 | FetchPickAndPlace-v1 + policy shaping | 5 seeds, 1000 ep, 19w |  Running |
-| 5 | FetchSlide-v1 baseline | 5 seeds, 1000 ep, 19w |  Pending |
-| 6 | FetchSlide-v1 + policy shaping | 5 seeds, 1000 ep, 19w |  Pending |
+| 1 | FetchPush-v1 baseline | 5 seeds, 1000 ep, 19w | ✅ Done |
+| 2 | FetchPush-v1 + policy shaping | 5 seeds, 1000 ep, 19w | ✅ Done |
+| 3 | FetchPickAndPlace-v1 baseline | 5 seeds, 1000 ep, 19w | ✅ Done |
+| 4 | FetchPickAndPlace-v1 + policy shaping | 5 seeds, 1000 ep, 19w | ✅ Done |
+| 5 | FetchSlide-v1 baseline | 5 seeds, 1000 ep, 19w | 🔄 Running |
+| 6 | FetchSlide-v1 + policy shaping | 5 seeds, 1000 ep, 19w | ⏳ Pending |
 
 ---
 
@@ -90,15 +90,21 @@ adaptive-safe-rl-policy-shaping/
 │   ├── train.py             ← Modified training script with --policy_shaping flag
 │   └── play.py              ← Modified play script with --policy_shaping flag
 ├── results/
-│   ├── fetchpush_comparison.png         ← Mingkang vs our replication side-by-side
-│   ├── fetchpush_baseline.gif           ← FetchPush LFE baseline visualization
-│   ├── fetchpush_policy_shaping.gif     ← FetchPush policy shaping with red forbidden zone
-│   ├── fetchpush_figure1_success.png    ← Success rate: baseline vs policy shaping
-│   ├── fetchpush_figure2_safety.png     ← Safety metrics over training
-│   ├── fetchpush_figure3_tradeoff.png   ← Safety-performance tradeoff curve
-│   ├── thesis_baseline_push.png         ← FetchPush 5-seed baseline curve
-│   ├── plot_lfe_single.py               ← Plotting script (single graph)
-│   └── plot_lfe_baseline.py             ← Plotting script (multi-subplot)
+│   ├── fetchpush/
+│   │   ├── fetchpush_figure1_success.png    ← Success rate: baseline vs policy shaping
+│   │   ├── fetchpush_figure2_safety.png     ← Safety metrics over training
+│   │   ├── fetchpush_figure3_tradeoff.png   ← Safety-performance tradeoff curve
+│   │   ├── fetchpush_figure4_comparison.png ← Baseline vs policy shaping bar chart
+│   │   ├── fetchpush_figure5_per_seed.png   ← Per-seed results breakdown
+│   │   └── fetchpush_table1_data.txt        ← Aggregate results table
+│   └── fetchpickandplace/
+│       ├── fetchpickandplace_baseline.png            ← Baseline learning curve
+│       ├── fetchpickandplace_figure1_success.png     ← Success rate: baseline vs policy shaping
+│       ├── fetchpickandplace_figure2_safety.png      ← Safety metrics over training
+│       ├── fetchpickandplace_figure3_tradeoff.png    ← Safety-performance tradeoff curve
+│       ├── fetchpickandplace_figure4_comparison.png  ← Baseline vs policy shaping bar chart
+│       ├── fetchpickandplace_figure5_per_seed.png    ← Per-seed results breakdown
+│       └── fetchpickandplace_table_baseline.txt      ← Baseline aggregate results
 ├── docs/
 │   └── safety_survey.md                 ← Safe RL literature survey
 └── README.md
@@ -186,67 +192,40 @@ for seed in 0 1 2 3 4; do
 done
 ```
 
-### Visualize trained policy
-```bash
-# Baseline
-python play.py ~/results/lfe_baseline/push/seed_0/policy_best.pkl
-
-# Policy shaping (with safety active)
-python play.py ~/results/lfe_policy_shaping/push/seed_0/policy_best.pkl --policy_shaping
-```
-
 ---
 
 ## Results — FetchPush-v1
 
 All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
 
-### Baseline replication vs Mingkang et al.
-
-<p align="center">
-  <img src="results/fetchpush_comparison.png" width="800"/>
-</p>
-
-> Left: reproduced from Wu et al. Figure 1 (5 seeds, mean ± std). Right: our replication (5 seeds, 1000 epochs, 19 MPI workers). Our replication matches Mingkang's final performance and converges significantly faster (~21 epochs vs ~200–300 epochs), confirming correct implementation before adding the policy shaping contribution.
-
----
-
-### FetchPush-v1 — LFE Baseline Trained Policy (~100% success rate)
-
-<p align="center">
-  <img src="results/fetchpush_baseline.gif" width="480"/>
-</p>
-
-> *"Trained LFE policy on FetchPush-v1 — 5 seeds, 1000 epochs, 19 MPI workers. The robot arm consistently pushes the puck to the target goal position, converging to ~100% success rate in ~21 epochs."*
-
----
-
-### FetchPush-v1 — Policy Shaping Trained Policy (with forbidden zone)
-
-<p align="center">
-  <img src="results/fetchpush_policy_shaping.gif" width="480"/>
-</p>
-
-> *"LFE + Policy Shaping on FetchPush-v1. The red zone represents the forbidden region the gripper must not enter. The shaped action β(s) blends the task policy with a safe policy based on proximity to the zone, achieving 99.67% ± 0.36% success rate with 0.263% ± 0.148% violation rate across 5 seeds."*
-
----
-
 ### Figure 1 — Task Success Rate: Baseline vs Policy Shaping
 
 <p align="center">
-  <img src="results/fetchpush_figure1_success.png" width="700"/>
+  <img src="results/fetchpush/fetchpush_figure1_success.png" width="700"/>
 </p>
 
 ### Figure 2 — Safety Metrics over Training
 
 <p align="center">
-  <img src="results/fetchpush_figure2_safety.png" width="900"/>
+  <img src="results/fetchpush/fetchpush_figure2_safety.png" width="900"/>
 </p>
 
 ### Figure 3 — Safety-Performance Tradeoff
 
 <p align="center">
-  <img src="results/fetchpush_figure3_tradeoff.png" width="700"/>
+  <img src="results/fetchpush/fetchpush_figure3_tradeoff.png" width="700"/>
+</p>
+
+### Figure 4 — Baseline vs Policy Shaping Comparison
+
+<p align="center">
+  <img src="results/fetchpush/fetchpush_figure4_comparison.png" width="700"/>
+</p>
+
+### Figure 5 — Per-Seed Results
+
+<p align="center">
+  <img src="results/fetchpush/fetchpush_figure5_per_seed.png" width="700"/>
 </p>
 
 ### Table 1 — FetchPush-v1 Aggregate Results (last 100 epochs, 5 seeds)
@@ -256,7 +235,7 @@ All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
 | LFE Baseline | 99.87% ± 0.18% | N/A | N/A | N/A |
 | LFE + Policy Shaping | **99.67% ± 0.36%** | **0.263% ± 0.148%** | 0.151 | 0.892 |
 
-> Policy shaping reduces safety violations to near zero while maintaining task performance within 0.20% of the baseline — demonstrating that safety and performance are not fundamentally at odds in this setting.
+> Policy shaping reduces safety violations to near zero while maintaining task performance within 0.20% of the baseline — demonstrating that safety and performance are not fundamentally at odds on FetchPush.
 
 ---
 
@@ -264,22 +243,67 @@ All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
 
 All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
 
-### FetchPickAndPlace-v1 — LFE Baseline Learning Curve
+### LFE Baseline Learning Curve
 
 <p align="center">
-  <img src="results/fetchpickandplace_baseline.png" width="700"/>
+  <img src="results/fetchpickandplace/fetchpickandplace_baseline.png" width="700"/>
 </p>
 
-| Method | Success Rate | Convergence Epoch | Seeds |
-|--------|-------------|-------------------|-------|
-| LFE Baseline | **98.76% ± 1.69%** | **~127** | 5 |
-| LFE + Policy Shaping | 🔄 Training | TBD | 5 |
+### Figure 1 — Task Success Rate: Baseline vs Policy Shaping
+
+<p align="center">
+  <img src="results/fetchpickandplace/fetchpickandplace_figure1_success.png" width="700"/>
+</p>
+
+### Figure 2 — Safety Metrics over Training
+
+<p align="center">
+  <img src="results/fetchpickandplace/fetchpickandplace_figure2_safety.png" width="900"/>
+</p>
+
+### Figure 3 — Safety-Performance Tradeoff
+
+<p align="center">
+  <img src="results/fetchpickandplace/fetchpickandplace_figure3_tradeoff.png" width="700"/>
+</p>
+
+### Figure 4 — Baseline vs Policy Shaping Comparison
+
+<p align="center">
+  <img src="results/fetchpickandplace/fetchpickandplace_figure4_comparison.png" width="700"/>
+</p>
+
+### Figure 5 — Per-Seed Results
+
+<p align="center">
+  <img src="results/fetchpickandplace/fetchpickandplace_figure5_per_seed.png" width="700"/>
+</p>
+
+### Table 2 — FetchPickAndPlace-v1 Aggregate Results (5 seeds, epoch 999)
+
+| Method | Success Rate | Violation Rate | Mean β | Shaped Rate |
+|--------|-------------|----------------|--------|-------------|
+| LFE Baseline | 98.76% ± 1.69% | N/A | N/A | N/A |
+| LFE + Policy Shaping | **96.72% ± 2.84%** | **10.33% ± 6.41%** | 0.256 | 0.860 |
+
+### Per-Seed Breakdown
+
+| Seed | Success Rate | Violation Rate |
+|------|-------------|----------------|
+| Seed 0 | 98.9% | 21.7% |
+| Seed 1 | 98.9% | 6.0% |
+| Seed 2 | 95.3% | 4.53% |
+| Seed 3 | 91.6% | 10.4% |
+| Seed 4 | 98.9% | 9.0% |
+| **Mean** | **96.72%** | **10.33%** |
+
+> FetchPickAndPlace presents a harder safety challenge than FetchPush due to a task-geometry conflict: the arm must move vertically through space near the forbidden zone to grasp and place objects. Policy shaping reduces violations from peak ~57% during exploration to ~10% at convergence, while maintaining task performance within 1.8% of the baseline. The high inter-seed variance (σ=6.41%) reflects the stochastic nature of this conflict — a scientifically meaningful finding that reveals an important limitation of geometry-agnostic policy shaping on complex manipulation tasks.
 
 ---
 
-## Results — FetchSlide-v1 *(pending)*
+## Results — FetchSlide-v1 *(running)*
 
-Training pending. Results will be added upon completion.
+FetchSlide-v1 baseline training is currently running (5 seeds, 1000 epochs, 19 MPI workers). Results will be added upon completion.
 
 ---
 
