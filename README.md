@@ -32,9 +32,9 @@ Experiments are conducted on the **OpenAI Gym Fetch robotics suite** using MuJoC
 
 | Environment | Task | Difficulty | Status |
 |-------------|------|------------|--------|
-| FetchPush-v1 | Push a puck to a goal position | Medium | ✅ Complete |
-| FetchPickAndPlace-v1 | Pick up and place a block at a goal | Hard | ✅ Complete |
-| FetchSlide-v1 | Slide a puck to a distant goal | Very Hard | 🔄 Running |
+| FetchPush-v1 | Push a puck to a goal position | Medium | Complete |
+| FetchPickAndPlace-v1 | Pick up and place a block at a goal | Hard | Complete |
+| FetchSlide-v1 | Slide a puck to a distant goal | Very Hard | Running |
 
 ---
 
@@ -71,12 +71,12 @@ where $d(s, \mathcal{Z})$ is the Euclidean distance from the gripper to the near
 
 | Phase | Environment | Config | Status |
 |-------|-------------|--------|--------|
-| 1 | FetchPush-v1 baseline | 5 seeds, 1000 ep, 19w | ✅ Done |
-| 2 | FetchPush-v1 + policy shaping | 5 seeds, 1000 ep, 19w | ✅ Done |
-| 3 | FetchPickAndPlace-v1 baseline | 5 seeds, 1000 ep, 19w | ✅ Done |
-| 4 | FetchPickAndPlace-v1 + policy shaping | 5 seeds, 1000 ep, 19w | ✅ Done |
-| 5 | FetchSlide-v1 baseline | 5 seeds, 1000 ep, 19w | 🔄 Running |
-| 6 | FetchSlide-v1 + policy shaping | 5 seeds, 1000 ep, 19w | ⏳ Pending |
+| 1 | FetchPush-v1 baseline | 5 seeds, 1000 ep, 19w | Done |
+| 2 | FetchPush-v1 + policy shaping | 5 seeds, 1000 ep, 19w | Done |
+| 3 | FetchPickAndPlace-v1 baseline | 5 seeds, 1000 ep, 19w | Done |
+| 4 | FetchPickAndPlace-v1 + policy shaping | 5 seeds, 1000 ep, 19w | Done |
+| 5 | FetchSlide-v1 baseline | 5 seeds, 1000 ep, 19w | Running |
+| 6 | FetchSlide-v1 + policy shaping | 5 seeds, 1000 ep, 19w | Pending |
 
 ---
 
