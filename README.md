@@ -243,12 +243,6 @@ All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
 
 All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
 
-### LFE Baseline Learning Curve
-
-<p align="center">
-  <img src="results/fetchpickandplace/fetchpickandplace_baseline.png" width="700"/>
-</p>
-
 ### Figure 1 — Task Success Rate: Baseline vs Policy Shaping
 
 <p align="center">
