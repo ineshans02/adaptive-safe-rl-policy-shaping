@@ -228,20 +228,19 @@ All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
   <img src="results/fetchpush/fetchpush_figure5_per_seed.png" width="700"/>
 </p>
 
-### Table 1 — FetchPush-v1 Aggregate Results (last 100 epochs, 5 seeds)
 
-| Method | Success Rate | Violation Rate | Mean β | Shaped Rate |
-|--------|-------------|----------------|--------|-------------|
-| LFE Baseline | 99.87% ± 0.18% | N/A | N/A | N/A |
-| LFE + Policy Shaping | **99.67% ± 0.36%** | **0.263% ± 0.148%** | 0.151 | 0.892 |
-
-> Policy shaping reduces safety violations to near zero while maintaining task performance within 0.20% of the baseline — demonstrating that safety and performance are not fundamentally at odds on FetchPush.
 
 ---
 
 ## Results — FetchPickAndPlace-v1
 
 All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
+
+### LFE Baseline Learning Curve
+
+<p align="center">
+  <img src="results/fetchpickandplace/fetchpickandplace_baseline.png" width="700"/>
+</p>
 
 ### Figure 1 — Task Success Rate: Baseline vs Policy Shaping
 
@@ -273,31 +272,30 @@ All experiments: **5 seeds, 1000 epochs, 19 MPI workers**.
   <img src="results/fetchpickandplace/fetchpickandplace_figure5_per_seed.png" width="700"/>
 </p>
 
-### Table 2 — FetchPickAndPlace-v1 Aggregate Results (5 seeds, epoch 999)
-
-| Method | Success Rate | Violation Rate | Mean β | Shaped Rate |
-|--------|-------------|----------------|--------|-------------|
-| LFE Baseline | 98.76% ± 1.69% | N/A | N/A | N/A |
-| LFE + Policy Shaping | **96.72% ± 2.84%** | **10.33% ± 6.41%** | 0.256 | 0.860 |
-
-### Per-Seed Breakdown
-
-| Seed | Success Rate | Violation Rate |
-|------|-------------|----------------|
-| Seed 0 | 98.9% | 21.7% |
-| Seed 1 | 98.9% | 6.0% |
-| Seed 2 | 95.3% | 4.53% |
-| Seed 3 | 91.6% | 10.4% |
-| Seed 4 | 98.9% | 9.0% |
-| **Mean** | **96.72%** | **10.33%** |
-
-> FetchPickAndPlace presents a harder safety challenge than FetchPush due to a task-geometry conflict: the arm must move vertically through space near the forbidden zone to grasp and place objects. Policy shaping reduces violations from peak ~57% during exploration to ~10% at convergence, while maintaining task performance within 1.8% of the baseline. The high inter-seed variance (σ=6.41%) reflects the stochastic nature of this conflict — a scientifically meaningful finding that reveals an important limitation of geometry-agnostic policy shaping on complex manipulation tasks.
+> FetchPickAndPlace presents a harder safety challenge than FetchPush due to a task-geometry conflict: the arm must move vertically through space near the forbidden zone to grasp and place objects. Policy shaping reduces violations from peak ~57% during exploration to ~10% at convergence, while maintaining task performance within 1.8% of the baseline. The high inter-seed variance (σ=6.41%) reflects the stochastic nature of this conflict — a scientifically meaningful finding that reveals an important limitation of geometry-agnostic policy shaping on complex manipulation tasks. See the unified results table below.
 
 ---
 
 ## Results — FetchSlide-v1 *(running)*
 
 FetchSlide-v1 baseline training is currently running (5 seeds, 1000 epochs, 19 MPI workers). Results will be added upon completion.
+
+---
+
+## Unified Results — All Environments
+
+### Aggregate Results (5 seeds, 1000 epochs, 19 MPI workers)
+
+| Environment | Method | Success Rate | Violation Rate | Mean β | Shaped Rate |
+|-------------|--------|-------------|----------------|--------|-------------|
+| FetchPush-v1 | LFE Baseline | 99.87% ± 0.18% | N/A | N/A | N/A |
+| FetchPush-v1 | LFE + Policy Shaping | **99.67% ± 0.36%** | **0.263% ± 0.148%** | 0.151 | 0.892 |
+| FetchPickAndPlace-v1 | LFE Baseline | 98.76% ± 1.69% | N/A | N/A | N/A |
+| FetchPickAndPlace-v1 | LFE + Policy Shaping | **96.72% ± 2.84%** | **10.33% ± 6.41%** | 0.256 | 0.860 |
+| FetchSlide-v1 | LFE Baseline | Pending | N/A | N/A | N/A |
+| FetchSlide-v1 | LFE + Policy Shaping | Pending | Pending | Pending | Pending |
+
+> Policy shaping consistently maintains task performance close to the baseline across all environments tested. Safety constraint satisfaction varies with task geometry complexity — near-zero violations on FetchPush (0.26%) and higher violations on FetchPickAndPlace (10.33%) where the pick-and-place trajectory inherently conflicts with the forbidden zone boundary. FetchSlide results pending.
 
 ---
 
