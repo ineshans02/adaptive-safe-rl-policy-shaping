@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+
+# Training checkpoints and logs
+*.pkl
+*.log
+log.txt
+params.json
+progress.csv
+
+# Results data (keep figures, ignore raw data)
+*.npz
+
+# Conda
+*.conda
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
