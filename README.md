@@ -75,8 +75,8 @@ where $d(s, \mathcal{Z})$ is the Euclidean distance from the gripper to the near
 | 2 | FetchPush-v1 + policy shaping | 5 seeds, 1000 ep, 19w | Done |
 | 3 | FetchPickAndPlace-v1 baseline | 5 seeds, 1000 ep, 19w | Done |
 | 4 | FetchPickAndPlace-v1 + policy shaping | 5 seeds, 1000 ep, 19w | Done |
-| 5 | FetchSlide-v1 baseline | 5 seeds, 1000 ep, 19w | Running |
-| 6 | FetchSlide-v1 + policy shaping | 5 seeds, 1000 ep, 19w | Pending |
+| 5 | FetchSlide-v1 baseline | 5 seeds, 1000 ep, 19w | Done |
+| 6 | FetchSlide-v1 + policy shaping | 5 seeds, 1000 ep, 19w | Done |
 
 ---
 
@@ -86,27 +86,41 @@ where $d(s, \mathcal{Z})$ is the Euclidean distance from the gripper to the near
 adaptive-safe-rl-policy-shaping/
 ├── policy_shaping.py        ← Core contribution: β computation, π_safe, SafetyTracker
 ├── rollout.py               ← Modified RolloutWorker with policy shaping injection
+├── environment.yml          ← Conda environment for reproducibility
 ├── experiment/
 │   ├── train.py             ← Modified training script with --policy_shaping flag
 │   └── play.py              ← Modified play script with --policy_shaping flag
 ├── results/
+│   ├── lfe_baseline_all_environments.png  ← LFE baseline curves: all 3 environments
+│   ├── fetchpush_comparison.png           ← Mingkang vs our replication side-by-side
+│   ├── beta_distance_curve.png            ← β activation vs gripper distance to zone
 │   ├── fetchpush/
-│   │   ├── fetchpush_figure1_success.png    ← Success rate: baseline vs policy shaping
-│   │   ├── fetchpush_figure2_safety.png     ← Safety metrics over training
-│   │   ├── fetchpush_figure3_tradeoff.png   ← Safety-performance tradeoff curve
-│   │   ├── fetchpush_figure4_comparison.png ← Baseline vs policy shaping bar chart
-│   │   ├── fetchpush_figure5_per_seed.png   ← Per-seed results breakdown
-│   │   └── fetchpush_table1_data.txt        ← Aggregate results table
-│   └── fetchpickandplace/
-│       ├── fetchpickandplace_baseline.png            ← Baseline learning curve
-│       ├── fetchpickandplace_figure1_success.png     ← Success rate: baseline vs policy shaping
-│       ├── fetchpickandplace_figure2_safety.png      ← Safety metrics over training
-│       ├── fetchpickandplace_figure3_tradeoff.png    ← Safety-performance tradeoff curve
-│       ├── fetchpickandplace_figure4_comparison.png  ← Baseline vs policy shaping bar chart
-│       ├── fetchpickandplace_figure5_per_seed.png    ← Per-seed results breakdown
-│       └── fetchpickandplace_table_baseline.txt      ← Baseline aggregate results
+│   │   ├── fetchpush_baseline.png               ← Baseline learning curve
+│   │   ├── fetchpush_figure1_success.png        ← Success rate: baseline vs policy shaping
+│   │   ├── fetchpush_figure2_safety.png         ← Safety metrics over training
+│   │   ├── fetchpush_figure3_tradeoff.png       ← Safety-performance tradeoff curve
+│   │   ├── fetchpush_figure4_comparison.png     ← Baseline vs policy shaping bar chart
+│   │   ├── fetchpush_figure5_per_seed.png       ← Per-seed results breakdown
+│   │   └── fetchpush_table1_data.txt            ← Aggregate results table
+│   ├── fetchpickandplace/
+│   │   ├── fetchpickandplace_baseline.png               ← Baseline learning curve
+│   │   ├── fetchpickandplace_figure1_success.png        ← Success rate: baseline vs policy shaping
+│   │   ├── fetchpickandplace_figure2_safety.png         ← Safety metrics over training
+│   │   ├── fetchpickandplace_figure3_tradeoff.png       ← Safety-performance tradeoff curve
+│   │   ├── fetchpickandplace_figure4_comparison.png     ← Baseline vs policy shaping bar chart
+│   │   ├── fetchpickandplace_figure5_per_seed.png       ← Per-seed results breakdown
+│   │   └── fetchpickandplace_table1_data.txt            ← Aggregate results table
+│   └── fetchslide/
+│       ├── fetchslide_baseline.png               ← Baseline learning curve
+│       ├── fetchslide_figure1_success.png        ← Success rate: baseline vs policy shaping
+│       ├── fetchslide_figure2_safety.png         ← Safety metrics over training
+│       ├── fetchslide_figure3_tradeoff.png       ← Safety-performance tradeoff curve
+│       ├── fetchslide_figure4_comparison.png     ← Baseline vs policy shaping bar chart
+│       ├── fetchslide_figure5_per_seed.png       ← Per-seed results breakdown
+│       └── fetchslide_table1_data.txt            ← Aggregate results table
 ├── docs/
-│   └── safety_survey.md                 ← Safe RL literature survey
+│   ├── safety_survey.md     ← Safe RL literature survey
+│   └── thesis.pdf           ← M.S. Thesis (added after defense)
 └── README.md
 ```
 
