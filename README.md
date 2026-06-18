@@ -34,7 +34,7 @@ Experiments are conducted on the **OpenAI Gym Fetch robotics suite** using MuJoC
 |-------------|------|------------|--------|
 | FetchPush-v1 | Push a puck to a goal position | Medium | Complete |
 | FetchPickAndPlace-v1 | Pick up and place a block at a goal | Hard | Complete |
-| FetchSlide-v1 | Slide a puck to a distant goal | Very Hard | Running |
+| FetchSlide-v1 | Slide a puck to a distant goal | Very Hard | Complete |
 
 ---
 
